@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/04/07 21:40:57 by ybong            ###   ########.fr       */
+/*   Updated: 2021/04/07 22:08:16 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 struct	checking
 {
-	int dash;
-	int zero;
-	int dot;
-	int precision;
-	int width;
-	char type;
+	int dash = 0;
+	int zero = 0;
+	int dot = 0;
+	int precision = 0;
+	int width = 0;
+	char type = 0;
 }
 
 

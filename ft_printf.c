@@ -2,18 +2,24 @@
 
 int ft_printf(const char *input, ...) 
 {
-	va_list	ap; //가변인자 포인터 선언
 	struct checking check;
-	int i;
+	va_list	ap; //가변인자 포인터 선언
+	char *toPrint;
+//	int i;
 
-	i = 0;
+//	i = 0;
 	va_start(ap, input); //가변인자 목록 포인터 설정
 
-	while (input++)
-	{
-		write(1, input[i], 1);
-		i++;
-	}
+	while (input)
+		if (*input != '%')
+			write(1, input++, 1); //바로 출력
+		else // (input == %)
+		{
+			input++;
+			while (*input == '')
+			if (*input == )
+			while ()
+		}
 	return 0;
 
 }
