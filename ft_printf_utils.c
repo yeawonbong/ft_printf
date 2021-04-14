@@ -1,3 +1,15 @@
+#include "ft_printf.h"
+
+int	ft_strlen(const char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
 char	*ft_strchr(const char *str, char c)
 {
 	int		i;
@@ -25,4 +37,11 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return ((int)res);
+}
+
+const char *passNum(const char *input)
+{
+	while ('0' <= *input && *input <= '9')
+		input++;
+	return (input - 1);
 }

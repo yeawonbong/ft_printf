@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwoo <jwoo@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/04/13 22:28:39 by jwoo             ###   ########.fr       */
+/*   Updated: 2021/04/14 18:14:43 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 struct	checking
 {
 	int dash;
+	int space;
 	int zero;
 	int width;
 	int dot;
@@ -23,5 +24,9 @@ struct	checking
 	char type;
 };
 
-char	*ft_strchr(const char *str, int c);
-int	ft_atoi(const char *str);
+char		*ft_strchr(const char *str, int c);
+int			ft_atoi(const char *str);
+const char	*passNum(const char *input);
+char		*CtoStr(va_list ap, char *toPrint);
+char		*PtoStr(va_list ap, char *toPrint);
+char		*fill_toPrint(va_list ap, char *toPrint);
