@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int	ft_strlen(const char *str)
+int			ft_strlen(const char *str)
 {
 	int i;
 
@@ -10,7 +10,7 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *str, char c)
+char		*ft_strchr(const char *str, char c)
 {
 	int		i;
 
@@ -24,7 +24,7 @@ char	*ft_strchr(const char *str, char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+int			ft_atoi(const char *str)
 {
 	long long i;
 	long long res;
@@ -38,8 +38,69 @@ int	ft_atoi(const char *str)
 	}
 	return ((int)res);
 }
+static int	ft_count_reslen(long long n)
+{
+	int			count;
+	int			minus;
+	int			reslen;
 
-const char *passNum(const char *input)
+	minus = 0;
+	if (n < 0)
+		minus = 1;
+	count = 1;
+	while (n / 10 != 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	reslen = count + minus;
+	return (reslen);
+}
+
+char		*ft_itoa(int n)
+{
+	long long	tempn;
+	char		*res;
+	int			reslen;
+
+	tempn = (long long)n;
+	reslen = ft_count_reslen(tempn);
+	if (!(res = (char*)malloc(reslen + 1)))
+		return (0);
+	if (tempn < 0)
+	{
+		res[0] = '-';
+		tempn *= -1;
+	}
+	res[reslen--] = '\0';
+	while (tempn / 10 != 0)
+	{
+		res[reslen] = (tempn % 10) + '0';
+		tempn = tempn / 10;
+		reslen--;
+	}
+	res[reslen] = tempn + '0';
+	return (res);
+}
+
+char	*ft_strdup(const char *str)
+{
+	char	*s;
+	int		i;
+
+	i = 0;
+	if (!(s = (char*)malloc(ft_strlen(str) + 1)))
+		return (0);
+	while (str[i])
+	{
+		s[i] = str[i];
+		i++;
+	}
+	s[i] = '\0';
+	return (s);
+}
+
+const char *lastNum(const char *input)
 {
 	while ('0' <= *input && *input <= '9')
 		input++;

@@ -1,43 +1,13 @@
 #include "ft_printf.h"
-
-const char *ft_check(struct checking check, char const *input)
-{
-	if (*input == '-')
-		check.dash = 1;
-	if (*input == ' ')
-		check.space = 1;
-	if (*input == '0')
-		check.zero = 1;
-	if ('0' <= *input && *input <= '9' || *input == '*') //width
-	{
-		if (*input == '*')
-			check.width = va_arg(ap, int);
-		else
-			check.width = ft_atoi(input);
-		input = passNum(input);
-	}
-	if (*input == '.') //precision
-	{
-		check.dot = 1;
-		if (*(++input) == '*')
-			check.width = va_arg(ap, int); 
-		else
-			check.precision = ft_atoi(++input);
-		input = passNum(input);
-	}
-	return (input);
-}
-
-
-
+#include <stdio.h>
 
 int ft_printf(const char *input, ...) 
 {
-	static struct checking check; //static 가능? ???????????????ㅇㅇ
+	static struct checking check;
 	va_list	ap; //가변인자 포인터 선언
-//	char *toPrint;
+	char *toPrint;
+//struct check 초기화해주는 함수 짜기 
 
-	check.precision = -1;
 	va_start(ap, input); //가변인자 목록 포인터 설정
 	while (input)
 	{
@@ -48,16 +18,20 @@ int ft_printf(const char *input, ...)
 			input++;
 			while ((check.type = *(ft_strchr("scpdiuxxX%", *input))) == 0)
 			{
-				ft_check(check, input);
+				ft_check(input, ap, check);
 				input++;
 			} //type 들어가면 끝남.
-			input++;
-			if (check.type == 'd' || check.type == 'i')) //숫자면
-				printNum();
-			else
-				printOthers(ap);
+			input++; //type 다음 가리키기
+			toPrint = fill_toPrint(ap, toPrint, check);
+			// write_toPrint(ap, toPrint)
 		}
 	}
+	//free (toPrint);
 	return 0;
 }
 
+int main()
+{
+	ft_printf("abc %25.5d", 25);
+	printf("dash = %d\n", check.dash);
+}
