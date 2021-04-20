@@ -6,8 +6,7 @@ int ft_printf(const char *input, ...)
 	va_list	ap; //가변인자 포인터 선언
 	char *toPrint;
 
-	check = malloc(sizeof(struct checking));
-	ft_memset(check, 0, sizeof(struct checking));
+
 	va_start(ap, input); //가변인자 목록 포인터 설정
 	while (*input)
 	{
@@ -15,24 +14,26 @@ int ft_printf(const char *input, ...)
 			write(1, input++, 1); //바로 출력
 		if (*input == '%')
 		{
+			check = malloc(sizeof(struct checking));
+			ft_memset(check, 0, sizeof(struct checking));
+			check->precision = -1;
 			input++;
-			while (*input && (check->type = ft_strchr("scpdiuxxX%", *input)) == 0)
-			{
-				ft_check(input, ap, check);
-				input++;
-			} //type 들어가면 끝남.
+			ft_check(input, ap, check);
 			input++; //type 다음 가리키기
 			toPrint = fill_toPrint(ap, toPrint, check);
-			// write_toPrint(ap, toPrint)
-		
-			printf("\n%d\n", check->dash);
-			printf("%d\n", check->space);
-			printf("%d\n", check->zero);
-			printf("%d\n", check->width);
-			printf("%d\n", check->dot);
-			printf("%d\n", check->precision);
-			printf("%c\n", check->type);
-			printf("|TOPRINT IS : %x\n", 29);
+										if(1) 
+					/*test code--->*/	{										
+											printf("\n|DASH IS : %d\n", check->dash);
+											printf("|SPACE IS : %d\n", check->space);
+											printf("|ZERO IS : %d\n", check->zero);
+											printf("|WIDTH IS : %d\n", check->width);
+											// printf("%d\n", check->dot);
+											printf("|PRECISION IS : %d\n", check->precision);
+											printf("|TYPE IS : %c\n", check->type);
+											printf("|@TOPRINT IS : %s\n", toPrint);
+										}
+			write_toPrint(ap, toPrint, check);
+			input++;
 		}
 	}
 	free (check);
@@ -42,5 +43,5 @@ int ft_printf(const char *input, ...)
 
 int main()
 {
-	ft_printf("abc%-15.3s", "hihihi");
+	ft_printf("abc%-3dAB", 3);
 }

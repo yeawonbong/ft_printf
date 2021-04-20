@@ -83,7 +83,7 @@ char		*ft_itoa(int n)
 	return (res);
 }
 
-char	*ft_strdup(const char *str)
+char		*ft_strdup(const char *str)
 {
 	char	*s;
 	int		i;
@@ -100,14 +100,14 @@ char	*ft_strdup(const char *str)
 	return (s);
 }
 
-const char *lastNum(const char *input)
+const char 	*lastNum(const char *input)
 {
 	while ('0' <= *input && *input <= '9')
 		input++;
-	return (input - 1);
+	return (input);
 }
 
-void	*ft_memset(void *ptr, int value, size_t num)
+void		*ft_memset(void *ptr, int value, size_t num)
 {
 	size_t			i;
 	unsigned char	*tempptr;
@@ -117,4 +117,23 @@ void	*ft_memset(void *ptr, int value, size_t num)
 	while (i < num)
 		tempptr[i++] = (unsigned char)value;
 	return (ptr);
+}
+
+char		*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*dst;
+	char	*src;
+
+	if (!s || !(dst = (char *)malloc(len + 1)))
+		return (0);
+	if (start < ft_strlen(s))
+	{
+		src = (char*)&s[start];
+		dst[len] = '\0';
+		while (len--)
+			dst[len] = src[len];
+	}
+	else
+		*dst = '\0';
+	return (dst);
 }

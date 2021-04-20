@@ -22,7 +22,7 @@ char	*XtoStr(va_list ap, char *toPrint, char alpha)
 	while (1 < i)
 	{
 		if ((num = temp % 16) < 10)
-			toPrint[i--] = num + 48;
+			toPrint[i--] = num + '0';
 		else
 			toPrint[i--] = num + toalpha;
 		temp /= 16;
@@ -53,31 +53,6 @@ char	*PtoStr(va_list ap, char *toPrint)
 	return (toPrint);
 }
 
-/*
-void	checkingStr(char *toPrint) //출력때로 옮기기
-{
-	int		extra;
-
-	if (check.width < check.precision)
-		check.width = check.precision;
-	if (0 < (extra = check.width - ft_strlen(toPrint)))
-	{
-		if (check.zero || check.space)
-		{
-			if (check.dash)
-			{
-				while (extra--)
-					write(1, " ", 1);
-				write(1, toPrint, ft_strlen(toPrint));
-				return (0);
-			}
-			write(1, toPrint, ft_strlen(toPrint));
-
-		}
-	}
-	else  //그냥  뽑아
-}
-*/
 char * fill_toPrint(va_list ap, char *toPrint, struct checking *check) 
 {
 	if (check->type == '%')
