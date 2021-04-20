@@ -1,22 +1,22 @@
 #include "ft_printf.h"
-#include <stdio.h>
 
 int ft_printf(const char *input, ...) 
 {
-	static struct checking check;
+	struct checking *check;
 	va_list	ap; //가변인자 포인터 선언
 	char *toPrint;
-//struct check 초기화해주는 함수 짜기 
 
+	check = malloc(sizeof(struct checking));
+	ft_memset(check, 0, sizeof(struct checking));
 	va_start(ap, input); //가변인자 목록 포인터 설정
-	while (input)
+	while (*input)
 	{
-		if (*input != '%')
+		if (*input && *input != '%')
 			write(1, input++, 1); //바로 출력
-		else // (input == %)
+		if (*input == '%')
 		{
 			input++;
-			while ((check.type = *(ft_strchr("scpdiuxxX%", *input))) == 0)
+			while (*input && (check->type = ft_strchr("scpdiuxxX%", *input)) == 0)
 			{
 				ft_check(input, ap, check);
 				input++;
@@ -24,14 +24,23 @@ int ft_printf(const char *input, ...)
 			input++; //type 다음 가리키기
 			toPrint = fill_toPrint(ap, toPrint, check);
 			// write_toPrint(ap, toPrint)
+		
+			printf("\n%d\n", check->dash);
+			printf("%d\n", check->space);
+			printf("%d\n", check->zero);
+			printf("%d\n", check->width);
+			printf("%d\n", check->dot);
+			printf("%d\n", check->precision);
+			printf("%c\n", check->type);
+			printf("|TOPRINT IS : %x\n", 29);
 		}
 	}
-	//free (toPrint);
+	free (check);
+	// free (toPrint);
 	return 0;
 }
 
 int main()
 {
-	ft_printf("abc %25.5d", 25);
-	printf("dash = %d\n", check.dash);
+	ft_printf("abc%-15.3s", "hihihi");
 }

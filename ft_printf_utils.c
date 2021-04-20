@@ -10,7 +10,7 @@ int			ft_strlen(const char *str)
 	return (i);
 }
 
-char		*ft_strchr(const char *str, char c)
+char		ft_strchr(const char *str, char c)
 {
 	int		i;
 
@@ -18,7 +18,7 @@ char		*ft_strchr(const char *str, char c)
 	while (str[i])
 	{
 		if (str[i] == c)
-			return ((char*)&str[i]);
+			return ((char)str[i]);
 		i++;
 	}
 	return (0);
@@ -105,4 +105,16 @@ const char *lastNum(const char *input)
 	while ('0' <= *input && *input <= '9')
 		input++;
 	return (input - 1);
+}
+
+void	*ft_memset(void *ptr, int value, size_t num)
+{
+	size_t			i;
+	unsigned char	*tempptr;
+
+	i = 0;
+	tempptr = (unsigned char *)ptr;
+	while (i < num)
+		tempptr[i++] = (unsigned char)value;
+	return (ptr);
 }

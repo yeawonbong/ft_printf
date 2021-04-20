@@ -78,22 +78,22 @@ void	checkingStr(char *toPrint) //출력때로 옮기기
 	else  //그냥  뽑아
 }
 */
-char * fill_toPrint(va_list ap, char *toPrint, struct checking check) 
+char * fill_toPrint(va_list ap, char *toPrint, struct checking *check) 
 {
-	if (check.type == '%')
+	if (check->type == '%')
 		toPrint = ft_strdup("%");
-	if (check.type == 'c')
+	if (check->type == 'c')
 		toPrint = CtoStr(ap, toPrint);
-	if (check.type == 's')
+	if (check->type == 's')
 		toPrint = va_arg(ap, char*);
-	if (check.type == 'p')
+	if (check->type == 'p')
 		toPrint = PtoStr(ap, toPrint);
-	if (check.type == 'd' || check.type == 'i')
+	if (check->type == 'd' || check->type == 'i')
 		toPrint = ft_itoa(va_arg(ap, int));
-	if (check.type == 'u')
+	if (check->type == 'u')
 		toPrint = ft_itoa(va_arg(ap, unsigned int));
-	if (check.type == 'x' || check.type == 'X')
-		toPrint = XtoStr(ap, toPrint, check.type);
+	if (check->type == 'x' || check->type == 'X')
+		toPrint = XtoStr(ap, toPrint, check->type);
 	return (toPrint);
 	//toPrint 출력 시작
 }
