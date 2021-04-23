@@ -18,11 +18,10 @@ int ft_printf(const char *input, ...)
 			ft_memset(check, 0, sizeof(struct checking));
 			check->precision = -1;
 			input++;
-			ft_check(input, ap, check);
-			input++; //type 다음 가리키기
+			input = ft_check(input, ap, check);//type 다음 가리키게 끝남
 			toPrint = fill_toPrint(ap, toPrint, check);
-										if(1) 
-					/*test code--->*/	{										
+									/*	if(1) 
+										{										
 											printf("\n|DASH IS : %d\n", check->dash);
 											printf("|SPACE IS : %d\n", check->space);
 											printf("|ZERO IS : %d\n", check->zero);
@@ -30,18 +29,23 @@ int ft_printf(const char *input, ...)
 											// printf("%d\n", check->dot);
 											printf("|PRECISION IS : %d\n", check->precision);
 											printf("|TYPE IS : %c\n", check->type);
-											printf("|@TOPRINT IS : %s\n", toPrint);
-										}
-	//		write_toPrint(ap, toPrint, check);
+											printf("|MINUS IS : %d\n", check->minus);
+											printf("|@TOPRINT IS : %s|\n", toPrint);
+										}*/
+			write_toPrint(ap, toPrint, check);
+			printf("||END: %s||\n", input);
 			input++;
 		}
 	}
-	free (check);
+	//free (check);
 	// free (toPrint);
 	return 0;
 }
 
 int main()
 {
-	ft_printf("abc%-010.10010d", -12345);
+	printf("|abc%-20.8s|\n", "abcde");
+	ft_printf("|abc%-20.8s|\n", "abcde"); //고치기
+//	ft_printf("abc%-010.3s", "12345");
+
 }

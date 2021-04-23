@@ -57,5 +57,5 @@ const char *ft_check(char const *input, va_list ap, struct checking *check)
 		input++;
 	}
 	check->type = *input;
-	return (input);
+	return (input++);
 }

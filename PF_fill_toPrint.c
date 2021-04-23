@@ -30,6 +30,20 @@ char	*XtoStr(va_list ap, char *toPrint, char alpha)
 	return (0);
 }
 
+char	*DItoStr(va_list ap, char *toPrint, struct checking *check)
+{
+	int	temp;
+
+	temp = va_arg(ap, int);
+	if (temp < 0)
+	{
+		check->minus = 1;
+		temp *= -1;
+	}
+	toPrint = ft_itoa(temp);
+	return (toPrint);
+}
+
 char	*PtoStr(va_list ap, char *toPrint)
 {
 	long long	temp;
@@ -57,17 +71,17 @@ char * fill_toPrint(va_list ap, char *toPrint, struct checking *check)
 {
 	if (check->type == '%')
 		toPrint = ft_strdup("%");
-	if (check->type == 'c')
+	else if (check->type == 'c')
 		toPrint = CtoStr(ap, toPrint);
-	if (check->type == 's')
+	else if (check->type == 's')
 		toPrint = va_arg(ap, char*);
-	if (check->type == 'p')
+	else if (check->type == 'p')
 		toPrint = PtoStr(ap, toPrint);
-	if (check->type == 'd' || check->type == 'i')
-		toPrint = ft_itoa(va_arg(ap, int)); //음수면 음수도 들어간 상태
-	if (check->type == 'u')
+	else if (check->type == 'd' || check->type == 'i')
+		toPrint = DItoStr(ap, toPrint, check);
+	else if (check->type == 'u')
 		toPrint = ft_itoa(va_arg(ap, unsigned int));
-	if (check->type == 'x' || check->type == 'X')
+	else if (check->type == 'x' || check->type == 'X')
 		toPrint = XtoStr(ap, toPrint, check->type);
 	return (toPrint);
 	//toPrint 출력 시작
