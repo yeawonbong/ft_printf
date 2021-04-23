@@ -32,7 +32,7 @@ int ft_printf(const char *input, ...)
 											printf("|TYPE IS : %c\n", check->type);
 											printf("|@TOPRINT IS : %s\n", toPrint);
 										}
-			write_toPrint(ap, toPrint, check);
+	//		write_toPrint(ap, toPrint, check);
 			input++;
 		}
 	}
@@ -43,5 +43,5 @@ int ft_printf(const char *input, ...)
 
 int main()
 {
-	ft_printf("abc%-3dAB", 3);
+	ft_printf("abc%-010.10010d", -12345);
 }

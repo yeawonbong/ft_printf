@@ -11,7 +11,7 @@ const char *fill_pricision(const char *input, va_list ap, struct checking *check
 	}
 	else if ('0' <= *input && *input <= '9')
 	{
-		check->precision = ft_atoi(++input);	
+		check->precision = ft_atoi(input);	
 		input = lastNum(input);
 	}
 	else	//'.'뒤에 아무것도 없는 경우
@@ -19,12 +19,12 @@ const char *fill_pricision(const char *input, va_list ap, struct checking *check
 		check->precision = 0;
 		input--;
 	}
-	return (0);
+	return (input);
 }
 
 const char *ft_check(char const *input, va_list ap, struct checking *check)
 {
-	while (*input && (ft_strchr("scpdiuxxX%", *input)) == 0)
+	while (*input && (ft_strchr("scpdiuxxX%", *input)) == 0) // while 안돌고 한방에 할수도? 고쳐보자 0420
 	{
 		if (*input == '-')
 		{
@@ -50,11 +50,12 @@ const char *ft_check(char const *input, va_list ap, struct checking *check)
 				check->width = ft_atoi(input);//여기 문제있다
 				input = lastNum(input);
 			}
+			input++; //10 
 		}
 		if (*input == '.') //precision
-			fill_pricision(input, ap, check);
+			input = fill_pricision(input, ap, check);
 		input++;
-	}printf("\nINPUT TYPE? %c", *input);
+	}
 	check->type = *input;
 	return (input);
 }

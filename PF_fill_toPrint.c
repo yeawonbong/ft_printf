@@ -64,7 +64,7 @@ char * fill_toPrint(va_list ap, char *toPrint, struct checking *check)
 	if (check->type == 'p')
 		toPrint = PtoStr(ap, toPrint);
 	if (check->type == 'd' || check->type == 'i')
-		toPrint = ft_itoa(va_arg(ap, int));
+		toPrint = ft_itoa(va_arg(ap, int)); //음수면 음수도 들어간 상태
 	if (check->type == 'u')
 		toPrint = ft_itoa(va_arg(ap, unsigned int));
 	if (check->type == 'x' || check->type == 'X')

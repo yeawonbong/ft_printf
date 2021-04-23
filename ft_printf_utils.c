@@ -104,6 +104,7 @@ const char 	*lastNum(const char *input)
 {
 	while ('0' <= *input && *input <= '9')
 		input++;
+	input--;
 	return (input);
 }
 
