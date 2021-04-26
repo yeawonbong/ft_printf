@@ -1,12 +1,13 @@
 #include "ft_printf.h"
 
-char	*apply_precision(va_list ap, char *toPrint, struct checking *check)
+char	*apply_precision(char *toPrint, struct checking *check)
 {
 	char	*temp;
 	int		gap;
 	int		i;
 	int		j;
 
+	temp = 0;
 	gap = 0;
 	i = 0;
 	j = 0;
@@ -23,7 +24,7 @@ char	*apply_precision(va_list ap, char *toPrint, struct checking *check)
 			return (toPrint);
 	}
 	else if (ft_strchr("di", check->type) && 0 < (gap = check->precision - ft_strlen(toPrint)))
-	{
+	{printf("IN\n");
 		temp = (char*)malloc(check->precision + 1);
 		while (gap--)
 			temp[i++] = '0';
@@ -33,20 +34,20 @@ char	*apply_precision(va_list ap, char *toPrint, struct checking *check)
 	}
 	return (temp);
 }
-
-void	preprocess(va_list ap, char *fill_toPrint, struct checking *check)
+/*
+void	preprocess(va_list ap, char *toPrint, struct checking *check)
 {
-	/* 왜만들었지? */
-};
+	 왜만들었지? 
+};*/
 
-void write_toPrint(va_list ap, char *toPrint, struct checking *check)
+void write_toPrint(char *toPrint, struct checking *check)
 {
 	int		gap;
 	char	gapChar;
 
 	if (0 <= check->precision) //precision 있을 떄 
-		toPrint = apply_precision(ap, toPrint, check);
-//	printf("TEST: %s\n",toPrint);
+		toPrint = apply_precision(toPrint, check);
+	printf("TEST: %s\n",toPrint);
 	if (ft_strchr("cdp", check->type) || check->dash) //0 무시되는 것 처리(error)
 		check->zero = 0;
 	gapChar = check->zero ? '0' : ' ';
@@ -61,7 +62,10 @@ void write_toPrint(va_list ap, char *toPrint, struct checking *check)
 	}
 	if (check->minus)
 		write(1, "-", 1);
-	write(1, toPrint, ft_strlen(toPrint));
+	// if (!toPrint)
+	// 	write(1, "(null)", 6);
+	if (*toPrint)
+		write(1, toPrint, ft_strlen(toPrint));
 	if (check->dash == 1 && gap)
 	{
 		while (gap--)

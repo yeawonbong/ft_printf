@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/04/26 15:22:27 by ybong            ###   ########.fr       */
+/*   Updated: 2021/04/26 16:02:37 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ struct	checking
 int			ft_strlen(const char *str);
 char		ft_strchr(const char *str, char c);
 int			ft_atoi(const char *str);
-static int	ft_count_reslen(long long n);
 char		*ft_itoa(int n);
 char		*ft_strdup(const char *str);
 const char	*lastNum(const char *input);
 void		*ft_memset(void *ptr, int value, size_t num);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_substr(char const *s, int start, size_t len);
 
 
 int			ft_printf(const char *input, ...);
@@ -46,5 +45,5 @@ char		*XtoStr(va_list ap, char *toPrint, char alpha);
 char		*DItoStr(va_list ap, char *toPrint, struct checking *check);
 char		*PtoStr(va_list ap, char *toPrint);
 char		*fill_toPrint(va_list ap, char *toPrint, struct checking *check);
-char		*apply_precision(va_list ap, char *toPrint, struct checking *check)
-void 		write_toPrint(va_list ap, char *toPrint, struct checking *check);
+char		*apply_precision(char *toPrint, struct checking *check);
+void 		write_toPrint(char *toPrint, struct checking *check);

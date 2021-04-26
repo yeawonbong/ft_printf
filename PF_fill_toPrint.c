@@ -51,17 +51,19 @@ char	*PtoStr(va_list ap, char *toPrint)
 	int			num;
 
 	temp = va_arg(ap, long long);
-	toPrint = (char*)malloc(15);
-	toPrint[14] = '\0';
+	if (!temp)
+		return (ft_strdup("0x0"));
+	toPrint = (char*)malloc(12);
+	toPrint[11] = '\0';
 	toPrint[0] = '0';
 	toPrint[1] = 'x';
-	i = 13;
+	i = 10;
 	while (1 < i)
 	{
 		if ((num = temp % 16) < 10)
 			toPrint[i--] = num + 48;
 		else
-			toPrint[i--] = num + 55; //소문자
+			toPrint[i--] = num + 87; //소문자
 		temp /= 16;
 	}
 	return (toPrint);
@@ -83,6 +85,11 @@ char * fill_toPrint(va_list ap, char *toPrint, struct checking *check)
 		toPrint = ft_itoa(va_arg(ap, unsigned int));
 	else if (check->type == 'x' || check->type == 'X')
 		toPrint = XtoStr(ap, toPrint, check->type);
+	if (!toPrint)
+		toPrint = ft_strdup("(null)");
 	return (toPrint);
 	//toPrint 출력 시작
 }
+
+//printf("2PRINTF: %s\n", toPrint);
+	

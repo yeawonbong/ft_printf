@@ -24,8 +24,8 @@ const char *fill_pricision(const char *input, va_list ap, struct checking *check
 
 const char *ft_check(char const *input, va_list ap, struct checking *check)
 {
-	while (*input && (ft_strchr("scpdiuxxX%", *input)) == 0) // while 안돌고 한방에 할수도? 고쳐보자 0420
-	{
+	// while (*input) // while 안돌고 한방에 할수도? 고쳐보자 0420 고쳐봤더 0426
+	// {
 		if (*input == '-')
 		{
 			check->dash = 1;
@@ -41,7 +41,7 @@ const char *ft_check(char const *input, va_list ap, struct checking *check)
 			check->zero = 1;
 			input++;
 		}
-		if ('0' <= *input && *input <= '9' || *input == '*') //width
+		if (('0' <= *input && *input <= '9') || *input == '*') //width
 		{
 			if (*input == '*')
 				check->width = va_arg(ap, int);
@@ -53,9 +53,15 @@ const char *ft_check(char const *input, va_list ap, struct checking *check)
 			input++; //10 
 		}
 		if (*input == '.') //precision
+		{
 			input = fill_pricision(input, ap, check);
-		input++;
-	}
+			input++;
+		}
+	// 	if (ft_strchr("scpdiuxxX%", *input)) == 1)
+	// }
 	check->type = *input;
 	return (input++);
 }
+
+
+// && (ft_strchr("scpdiuxxX%", *input)) == 0
