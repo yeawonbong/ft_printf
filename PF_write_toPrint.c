@@ -11,11 +11,16 @@ char	*apply_precision(va_list ap, char *toPrint, struct checking *check)
 	i = 0;
 	j = 0;
 	check->zero = 0; //precision 있으면 0이 무시된다.
-	if (check->type == 's' && ft_strlen(toPrint) > check->precision)
+	if (check->type == 's')
 	{
-		temp = ft_substr(toPrint, 0, check->precision);
-		free(toPrint);
-		toPrint = temp;
+		if (ft_strlen(toPrint) > check->precision)
+		{
+			temp = ft_substr(toPrint, 0, check->precision);
+			//free(toPrint);
+			toPrint = temp;
+		}
+		else
+			return (toPrint);
 	}
 	else if (ft_strchr("di", check->type) && 0 < (gap = check->precision - ft_strlen(toPrint)))
 	{
@@ -28,6 +33,12 @@ char	*apply_precision(va_list ap, char *toPrint, struct checking *check)
 	}
 	return (temp);
 }
+
+void	preprocess(va_list ap, char *fill_toPrint, struct checking *check)
+{
+	/* 왜만들었지? */
+};
+
 void write_toPrint(va_list ap, char *toPrint, struct checking *check)
 {
 	int		gap;
@@ -43,7 +54,7 @@ void write_toPrint(va_list ap, char *toPrint, struct checking *check)
 		gap = 0;
 	if (gap && check->minus)
 		gap--;
-	if (check->dash == 0 && gap)
+	if (gap && check->dash == 0)
 	{
 		while (gap--)
 			write(1, &gapChar, 1);
@@ -61,28 +72,3 @@ void write_toPrint(va_list ap, char *toPrint, struct checking *check)
 
 
 }
-  /*
-void	checkingStr(char *toPrint) //출력때로 옮기기
-{
-	int		extra;
-
-	if (check.width < check.precision)
-		check.width = check.precision;
-	if (0 < (extra = check.width - ft_strlen(toPrint)))
-	{
-		if (check.zero || check.space)
-		{
-			if (check.dash)
-			{
-				while (extra--)
-					write(1, " ", 1);
-				write(1, toPrint, ft_strlen(toPrint));
-				return (0);
-			}
-			write(1, toPrint, ft_strlen(toPrint));
-
-		}
-	}
-	else  //그냥  뽑아
-}
-}*/

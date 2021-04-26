@@ -33,7 +33,6 @@ int ft_printf(const char *input, ...)
 											printf("|@TOPRINT IS : %s|\n", toPrint);
 										}*/
 			write_toPrint(ap, toPrint, check);
-			printf("||END: %s||\n", input);
 			input++;
 		}
 	}
@@ -44,8 +43,8 @@ int ft_printf(const char *input, ...)
 
 int main()
 {
-	printf("|abc%-20.8s|\n", "abcde");
-	ft_printf("|abc%-20.8s|\n", "abcde"); //고치기
+	printf("|abc%20.3s|\n", "abcde");
+	ft_printf("|abc%20.3s|\n", "abcde"); //고치기
 //	ft_printf("abc%-010.3s", "12345");
 
 }
