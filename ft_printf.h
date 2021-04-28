@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/04/26 16:02:37 by ybong            ###   ########.fr       */
+/*   Updated: 2021/04/28 20:56:45 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ struct	checking
 
 int			ft_strlen(const char *str);
 char		ft_strchr(const char *str, char c);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
 int			ft_atoi(const char *str);
 char		*ft_itoa(int n);
 char		*ft_strdup(const char *str);
@@ -42,7 +43,7 @@ const char	*fill_pricision(const char *input, va_list ap, struct checking *check
 const char	*ft_check(char const *input, va_list ap, struct checking *check);
 char		*CtoStr(va_list ap, char *toPrint);
 char		*XtoStr(va_list ap, char *toPrint, char alpha);
-char		*DItoStr(va_list ap, char *toPrint, struct checking *check);
+char		*DIUtoStr(va_list ap, char *toPrint, struct checking *check);
 char		*PtoStr(va_list ap, char *toPrint);
 char		*fill_toPrint(va_list ap, char *toPrint, struct checking *check);
 char		*apply_precision(char *toPrint, struct checking *check);

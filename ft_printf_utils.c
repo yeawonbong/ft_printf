@@ -23,6 +23,27 @@ char		ft_strchr(const char *str, char c)
 	}
 	return (0);
 }
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	dstlen;
+	size_t	srclen;
+	size_t	i;
+
+	dstlen = ft_strlen(dst);
+	srclen = ft_strlen(src);
+	if (size == 0)
+		return (srclen);
+	i = 0;
+	while ((src[i] && dstlen + i < size - 1))
+	{
+		dst[dstlen + i] = src[i];
+		i++;
+	}
+	dst[dstlen + i] = '\0';
+	if (size > dstlen)
+		return (dstlen + srclen);
+	return (size + srclen);
+}
 
 int			ft_atoi(const char *str)
 {
