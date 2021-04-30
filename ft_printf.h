@@ -6,13 +6,14 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/04/28 20:56:45 by ybong            ###   ########.fr       */
+/*   Updated: 2021/04/30 17:22:28 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <stdio.h>
 
 struct	checking
@@ -24,13 +25,13 @@ struct	checking
 	int		precision;
 	char 	type;
 	int		minus;
+	int		count; ///O
 };
 
 int			ft_strlen(const char *str);
 char		ft_strchr(const char *str, char c);
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
 int			ft_atoi(const char *str);
-char		*ft_itoa(int n);
+char		*ft_itoa(long long n);
 char		*ft_strdup(const char *str);
 const char	*lastNum(const char *input);
 void		*ft_memset(void *ptr, int value, size_t num);

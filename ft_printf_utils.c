@@ -78,7 +78,7 @@ static int	ft_count_reslen(long long n)
 	return (reslen);
 }
 
-char		*ft_itoa(int n)
+char		*ft_itoa(long long n)
 {
 	long long	tempn;
 	char		*res;

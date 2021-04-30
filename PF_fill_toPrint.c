@@ -39,17 +39,21 @@ char	*DIUtoStr(va_list ap, char *toPrint, struct checking *check)
 {
 	long long	temp;
 
-	if (!(temp = check->type == 'u' ? va_arg(ap, int) : va_arg(ap, unsigned int)))
-	{
-		// if (check->precision == 0)
-		// 	return (ft_strdup(""));
+	if (!(temp = check->type == 'u' ? va_arg(ap,unsigned int) : va_arg(ap, int)))
 		return (ft_strdup("0"));
-	}
-	// printf("TEMP IS : %d\n", (int)temp);
-	if ((int)temp < 0)
+	// if (temp == INT_MIN && check->type == 'd')
+	// {
+	// 	check->minus = 1;
+	// 	return (ft_strdup("2147483648"));
+	// }
+	//  printf("TEMP IS : %lld\n", temp);
+	//  printf("TEMP IS : %d\n", temp);
+	if (temp < 0)
 	{
 		check->minus = 1;
 		temp *= -1;
+	// printf("TEMP *-1 IS : %d\n", (int)temp);
+
 	}
 	toPrint = ft_itoa(temp);
 

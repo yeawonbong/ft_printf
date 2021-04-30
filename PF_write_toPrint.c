@@ -39,10 +39,13 @@ char	*apply_precision(char *toPrint, struct checking *check)
 }
 
 //char	apply_width_DI()
-int		write_gap(int gap, int gapChar)
+int		write_gap(int gap, int gapChar, struct checking *check)
 {
 	while (gap--)
+	{
 		write(1, &gapChar, 1);
+		check->count++;
+	}
 	return (gap);
 }
 
@@ -65,7 +68,7 @@ int		preorocess(int gap, /*char gapChar,*/ struct checking *check, char *toPrint
 
 
 
-void	write_toPrint(char *toPrint, struct checking *check)
+void		write_toPrint(char *toPrint, struct checking *check)
 {
 	int		gap;
 	char	gapChar;
@@ -75,23 +78,27 @@ void	write_toPrint(char *toPrint, struct checking *check)
 		toPrint = apply_precision(toPrint, check);
 	gap = preorocess(gap, /*gapChar,*/ check, toPrint);
 	gapChar = check->zero ? '0' : ' ';
-//printf("CHECKTYPE IS : %c\n", check->type);
-//printf("GAPCHAR IS : %c\n", gapChar);
-//	printf("GAP:::: %d\n", gap);
 	if (gap && !check->dash && !(check->minus && check->zero))
-		write_gap(gap, gapChar);
-	if (check->minus && *toPrint != '-')
+		write_gap(gap, gapChar, check);
+	if (check->minus && ft_strchr("di", check->type) && *toPrint != '-')
 	{
 		write(1, "-", 1);
+		check->count++;
 		if (check->zero)
-			gap = write_gap(gap, gapChar);
+			gap = write_gap(gap, gapChar, check);
 	}
 	if (*toPrint)
+	{
 		write(1, toPrint, ft_strlen(toPrint));
+		check->count += ft_strlen(toPrint);
+	}
 	if (check->type == 'c' && *toPrint == '\0')
-		write(1, "\0", 1);
+		{
+			write(1, "\0", 1);
+			//count++; //\0도 카운트 하나 ? !!!!!!!!!!!!!!!!!!!!!!!!!!
+		}
 	if (gap && check->dash)
-		write_gap(gap, gapChar);
+		write_gap(gap, gapChar, check);
 	return ;
 //	printf("|@TOPRINT AFTER WRITE IS : %s\n", toPrint);
 
