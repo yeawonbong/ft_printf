@@ -78,7 +78,7 @@ static int	ft_count_reslen(long long n)
 	return (reslen);
 }
 
-char		*ft_itoa(long long n)
+char		*ft_itoa(int n)
 {
 	long long	tempn;
 	char		*res;
@@ -91,6 +91,31 @@ char		*ft_itoa(long long n)
 	if (tempn < 0)
 	{
 		res[0] = '-';
+		tempn *= -1;
+	}
+	res[reslen--] = '\0';
+	while (tempn / 10 != 0)
+	{
+		res[reslen] = (tempn % 10) + '0';
+		tempn = tempn / 10;
+		reslen--;
+	}
+	res[reslen] = tempn + '0';
+	return (res);
+}
+
+char	*ft_utoa(unsigned int n)
+{
+	unsigned int	tempn;
+	char		*res;
+	int			reslen;
+
+	tempn = n;
+	reslen = ft_count_reslen(tempn);
+	if (!(res = (char*)malloc(reslen + 1)))
+		return (0);
+	if (tempn < 0)
+	{
 		tempn *= -1;
 	}
 	res[reslen--] = '\0';

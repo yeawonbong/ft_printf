@@ -35,29 +35,28 @@ char	*XtoStr(va_list ap, char *toPrint, char alpha)
 	return (toPrint);
 }
 
-char	*DIUtoStr(va_list ap, char *toPrint, struct checking *check)
+char	*DIUtoStr(va_list ap, struct checking *check)
 {
 	long long	temp;
 
 	if (!(temp = check->type == 'u' ? va_arg(ap,unsigned int) : va_arg(ap, int)))
 		return (ft_strdup("0"));
-	// if (temp == INT_MIN && check->type == 'd')
+//	 printf("IN TEMP IS : %lld\n", temp);
+//	 printf("TEMP IS : %d\n", temp);
+	// if (ft_strchr("di", check->type) && temp == INT_MIN)
 	// {
 	// 	check->minus = 1;
 	// 	return (ft_strdup("2147483648"));
 	// }
-	//  printf("TEMP IS : %lld\n", temp);
-	//  printf("TEMP IS : %d\n", temp);
-	if (temp < 0)
+	if ((int)temp < 0 && ft_strchr("di", check->type))
 	{
 		check->minus = 1;
 		temp *= -1;
 	// printf("TEMP *-1 IS : %d\n", (int)temp);
-
 	}
-	toPrint = ft_itoa(temp);
-
-	return (toPrint);
+	if (check->type == 'u')
+		return (ft_utoa(temp));
+	return (ft_itoa(temp));
 }
 
 char	*StoStr(va_list ap, char *toPrint)
@@ -68,16 +67,22 @@ char	*StoStr(va_list ap, char *toPrint)
 	return (toPrint);
 }
 
-char	*PtoStr(va_list ap, char *toPrint)
+char	*PtoStr(va_list ap, struct checking *check, char *toPrint)
 {
 	long long	temp;
 	int 		i;
 	int			j;
 	int			num;
 	char		tempStr[13];
-
-	if (!(temp = va_arg(ap, long long)))
+//printf("IN\n");
+	if ((temp = va_arg(ap, long long)) == 0)
+	{
+		if (check->precision == 0)
+			return (ft_strdup("0x"));
 		return (ft_strdup("0x0"));
+	}
+	// if (temp == NULL)
+	// 	printf("void\n");
 	ft_memset(tempStr, '0', 12);
 	tempStr[12] = '\0';	
 	i = 11;
@@ -96,8 +101,11 @@ char	*PtoStr(va_list ap, char *toPrint)
 	toPrint[0] = '0';
 	toPrint[1] = 'x';
 	j = 2;
+	if (!*tempStr)
+		toPrint[j++] = '0';
 	while (tempStr[i])
 		toPrint[j++] = tempStr[i++];
+	toPrint[j] = '\0';
 	return (toPrint);
 }
 
@@ -115,14 +123,14 @@ char * fill_toPrint(va_list ap, char *toPrint, struct checking *check)
 	// 	toPrint = (char*)malloc(sizeof(temp) + 3);
 	// 	ft_strlcat("0x", temp , sizeof(temp) + 3);
 	// }
-		toPrint = PtoStr(ap, toPrint);
+		toPrint = PtoStr(ap, check, toPrint);
 	else if (check->type == 'd' || check->type == 'i' || check->type == 'u')
-		toPrint = DIUtoStr(ap, toPrint, check);
+		toPrint = DIUtoStr(ap, check);
 	// else if (check->type == 'u')
 	// 	toPrint = ft_itoa(va_arg(ap, unsigned int));
 	else if (check->type == 'x' || check->type == 'X')
 		toPrint = XtoStr(ap, toPrint, check->type);
-	if (ft_strchr("diuxX", check->type) && check->precision == 0)
+	if (ft_strchr("diuxX", check->type) && check->precision == 0 && *toPrint == '0')
 	{	
 		free (toPrint);
 		return (ft_strdup(""));

@@ -1,5 +1,5 @@
 #include "ft_printf.h"
-
+#include <stdio.h>
 
 int ft_printf(const char *input, ...) 
 {
@@ -25,18 +25,18 @@ int ft_printf(const char *input, ...)
 			input++; //%다음을 가리킴
 			input = ft_check(input, ap, check);//type 다음 가리키게 끝남
 			toPrint = fill_toPrint(ap, toPrint, check);
-										// if(1) 
-										// {										
-										// 	printf("\n|DASH IS : %d\n", check->dash);
-										// 	printf("|SPACE IS : %d\n", check->space);
-										// 	printf("|ZERO IS : %d\n", check->zero);
-										// 	printf("|WIDTH IS : %d\n", check->width);
-										// 	// printf("%d\n", check->dot);
-										// 	printf("|PRECISION IS : %d\n", check->precision);
-										// 	printf("|TYPE IS : %c\n", check->type);
-										// 	printf("|MINUS IS : %d\n", check->minus);
-										// 	printf("|@TOPRINT IS : %s|\n", toPrint);
-										// }
+										if(1) 
+										{										
+											// printf("\n|DASH IS : %d\n", check->dash);
+											// printf("|SPACE IS : %d\n", check->space);
+											// printf("|ZERO IS : %d\n", check->zero);
+											// printf("|WIDTH IS : %d\n", check->width);
+											// // printf("%d\n", check->dot);
+											// printf("|PRECISION IS : %d\n", check->precision);
+											// printf("|TYPE IS : %c\n", check->type);
+											// printf("|MINUS IS : %d\n", check->minus);
+											// printf("|@TOPRINT IS : %s|\n", toPrint);
+										}
 			write_toPrint(toPrint, check);
 			input++;
 		}
@@ -46,15 +46,16 @@ int ft_printf(const char *input, ...)
 	return (check->count);
 }
 
-int main()
-{
-	int *p;
-	char a;
-	char *b = "hi";
+// int main()
+// {
+// 	int *p = 0;
+//     int a;
+//     int b;
 
-	// printf("%x", UINT_MAX);
-	printf("|%d|\n", -444);
-	ft_printf("|%d|(MY)\n", -444); 
-//	ft_printf("abc%-010.3s", "12345");
-system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
-}
+//     a = printf("|%0*.%|\n",4);
+// //    a = printf("|%000-00*i|",X);
+//     printf("\nprintf = %d", a);
+//     printf("\n---------------\n");
+//     b = ft_printf("|%0*.%|\n",4);
+//     printf("\nft_printf = %d\n", b);
+// }

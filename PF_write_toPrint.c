@@ -74,7 +74,7 @@ void		write_toPrint(char *toPrint, struct checking *check)
 	char	gapChar;
 
 	gap = 0;
-	if (0 <= check->precision) //precision 있을 떄 
+	if (0 <= check->precision && check->type != '%') //precision 있을 떄 
 		toPrint = apply_precision(toPrint, check);
 	gap = preorocess(gap, /*gapChar,*/ check, toPrint);
 	gapChar = check->zero ? '0' : ' ';
@@ -95,7 +95,7 @@ void		write_toPrint(char *toPrint, struct checking *check)
 	if (check->type == 'c' && *toPrint == '\0')
 		{
 			write(1, "\0", 1);
-			//count++; //\0도 카운트 하나 ? !!!!!!!!!!!!!!!!!!!!!!!!!!
+			check->count++; //\0도 카운트 하나 ? !!!!!!!!!!!!!!!!!!!!!!!!!!
 		}
 	if (gap && check->dash)
 		write_gap(gap, gapChar, check);
