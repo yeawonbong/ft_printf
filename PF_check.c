@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-const char *fill_pricision(const char *input, va_list ap, struct checking *check)
+const char *fill_pricision(const char *input, va_list ap, t_checking *check)
 {
 	input++;
 	if (*input == '*')
@@ -22,29 +22,24 @@ const char *fill_pricision(const char *input, va_list ap, struct checking *check
 	return (input);
 }
 
-const char *ft_check(char const *input, va_list ap, struct checking *check)
+const char *ft_check(char const *input, va_list ap, t_checking *check)
 {
-	while (!ft_strchr("cspdiuxX%", *input)) // while 안돌고 한방에 할수도? 고쳐보자 0420 고쳐봤더 0426
+	while (!ft_strchr("cspdiuxX%", *input) && *input) // while 안돌고 한방에 할수도? 고쳐보자 0420 고쳐봤더 0426
 	{
 		if (*input == '-')
 		{
 			check->dash = 1;
-			input++;
+		//	input++;
 		}
 		else if (*input == ' ')
 		{
 			check->space = 1;
-			input++;
+		//	input++;
 		}
 		else if (*input == '0')
 		{
 			check->zero = 1;
-			input++;
-			// if (*input == '-')
-			// {
-			// 	check->dash = 1; //여기 ignored 고친건데 모르겠다... 오류 더 늘어남^_^
-			// 	input++;
-			// }
+		//	input++;
 		}
 		if (('0' <= *input && *input <= '9') || *input == '*') //width
 		{
@@ -62,18 +57,19 @@ const char *ft_check(char const *input, va_list ap, struct checking *check)
 				check->width = ft_atoi(input);
 				input = lastNum(input);
 			}
-			input++; //10 ???
+		//	input++; //10 ???
 		}
 		if (*input == '.') //precision
 		{
 			input = fill_pricision(input, ap, check);
-			input++;
+		//	input++;
 		}
-	// 	if (ft_strchr("scpdiuxxX%", *input)) == 1)
+		input++;
 	}
+	if (!*input)
+		return (0);
 	check->type = *input;
 	return (input++);
 }
-
 
 // && (ft_strchr("scpdiuxxX%", *input)) == 0

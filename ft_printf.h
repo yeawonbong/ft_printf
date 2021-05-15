@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/04/30 22:31:33 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/15 19:41:32 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 #include <stdlib.h>
 #include <limits.h>
 
-struct	checking
+#include <stdio.h>
+
+typedef struct	s_checking
 {
 	int 	dash;
 	int 	space;
@@ -26,14 +28,14 @@ struct	checking
 	int		precision;
 	char 	type;
 	int		minus;
-	int		count; 
-}; //t_어쩌구
+	int		count;
+}			t_checking;
 
 int			ft_strlen(const char *str);
 char		ft_strchr(const char *str, char c);
 int			ft_atoi(const char *str);
 char		*ft_itoa(int n);
-char	*ft_utoa(unsigned int n);
+char		*ft_utoa(unsigned int n);
 
 char		*ft_strdup(const char *str);
 const char	*lastNum(const char *input);
@@ -43,14 +45,14 @@ char		*ft_substr(char const *s, int start, size_t len);
 
 int			ft_printf(const char *input, ...);
 
-const char	*fill_pricision(const char *input, va_list ap, struct checking *check);
-const char	*ft_check(char const *input, va_list ap, struct checking *check);
+const char	*fill_pricision(const char *input, va_list ap, t_checking *check);
+const char	*ft_check(char const *input, va_list ap, t_checking *check);
 char		*CtoStr(va_list ap, char *toPrint);
 char		*XtoStr(va_list ap, char *toPrint, char alpha);
-char		*DIUtoStr(va_list ap, struct checking *check);
-char		*PtoStr(va_list ap, struct checking *check, char *toPrint);
-char		*fill_toPrint(va_list ap, char *toPrint, struct checking *check);
-char		*apply_precision(char *toPrint, struct checking *check);
-void 		write_toPrint(char *toPrint, struct checking *check);
+char		*DIUtoStr(va_list ap, t_checking *check);
+char		*PtoStr(va_list ap, t_checking *check, char *toPrint);
+char		*fill_toPrint(va_list ap, char *toPrint, t_checking *check);
+char		*apply_precision(char *toPrint, t_checking *check);
+void 		write_toPrint(char *toPrint, t_checking *check);
 
 #endif

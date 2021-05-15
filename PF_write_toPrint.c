@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-char	*apply_precision(char *toPrint, struct checking *check)
+char	*apply_precision(char *toPrint, t_checking *check)
 {
 	char	*temp;
 	int		gap;
@@ -39,7 +39,7 @@ char	*apply_precision(char *toPrint, struct checking *check)
 }
 
 //char	apply_width_DI()
-int		write_gap(int gap, int gapChar, struct checking *check)
+int		write_gap(int gap, int gapChar, t_checking *check)
 {
 	while (gap--)
 	{
@@ -49,9 +49,9 @@ int		write_gap(int gap, int gapChar, struct checking *check)
 	return (gap);
 }
 
-int		preorocess(int gap, /*char gapChar,*/ struct checking *check, char *toPrint)
+int		preorocess(int gap, /*char gapChar,*/ t_checking *check, char *toPrint)
 {
-	if (ft_strchr("csp", check->type) || check->dash) //0 무시되는 것 처리(error)
+	if (ft_strchr("cp", check->type) || check->dash) //0 무시되는 것 처리(error)
 		check->zero = 0;
 	if ((gap = check->width - ft_strlen(toPrint)) < 0)
 		gap = 0;
@@ -68,15 +68,17 @@ int		preorocess(int gap, /*char gapChar,*/ struct checking *check, char *toPrint
 
 
 
-void		write_toPrint(char *toPrint, struct checking *check)
+void		write_toPrint(char *toPrint, t_checking *check)
 {
 	int		gap;
 	char	gapChar;
 
 	gap = 0;
+	if (check->space && ft_strchr("diuxX", check->type))
+		write(1, " ", 1);
 	if (0 <= check->precision && check->type != '%') //precision 있을 떄 
 		toPrint = apply_precision(toPrint, check);
-	gap = preorocess(gap, /*gapChar,*/ check, toPrint);
+	gap = preorocess(gap, check, toPrint);
 	gapChar = check->zero ? '0' : ' ';
 	if (gap && !check->dash && !(check->minus && check->zero))
 		write_gap(gap, gapChar, check);
@@ -95,7 +97,7 @@ void		write_toPrint(char *toPrint, struct checking *check)
 	if (check->type == 'c' && *toPrint == '\0')
 		{
 			write(1, "\0", 1);
-			check->count++; //\0도 카운트 하나 ? !!!!!!!!!!!!!!!!!!!!!!!!!!
+			check->count++;
 		}
 	if (gap && check->dash)
 		write_gap(gap, gapChar, check);
