@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/15 19:41:32 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/16 22:28:10 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <limits.h>
-
-#include <stdio.h>
 
 typedef struct	s_checking
 {

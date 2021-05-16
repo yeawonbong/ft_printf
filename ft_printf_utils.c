@@ -3,9 +3,8 @@
 int			ft_strlen(const char *str)
 {
 	int i;
-
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 		i++;
 	return (i);
 }
@@ -135,7 +134,7 @@ char		*ft_strdup(const char *str)
 	int		i;
 
 	i = 0;
-	if (!(s = (char*)malloc(ft_strlen(str) + 1)))
+	if (!(s = (char*)malloc(ft_strlen(str) + 1)) || !str)
 		return (0);
 	while (str[i])
 	{

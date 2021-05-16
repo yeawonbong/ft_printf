@@ -46,7 +46,7 @@ int ft_printf(const char *input, ...)
 		}
 	}
 	res = check->count;
-	// free (check);
+	free (check);
 	// if (toPrint)
 	// 	free (toPrint); // free를... 찾아서 해줘.......
 // system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
@@ -59,10 +59,10 @@ int ft_printf(const char *input, ...)
 //     int a;
 //     int b;
 
-//     a = printf("%i\n", 3);
+//     a = printf("%d\n", 17);
 //     printf("\nprintf = %d", a);
 //     printf("\n---------------\n");
-//     b = ft_printf("%i\n", 3);
+//     b = ft_printf("%d\n", 17);
 //     printf("\nft_printf = %d\n", b);
 // system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
 	

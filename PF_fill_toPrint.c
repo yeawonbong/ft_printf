@@ -13,6 +13,7 @@ char	*XtoStr(va_list ap, char *toPrint, char alpha)
 	unsigned int	num;
 	int				i;
 	int				toalpha;
+	char			*res;
 
 	toalpha = alpha == 'x' ? 87 : 55;
 	if (!(temp = va_arg(ap, unsigned int)))
@@ -29,9 +30,12 @@ char	*XtoStr(va_list ap, char *toPrint, char alpha)
 			toPrint[i--] = num + toalpha;
 		temp /= 16;
 	}
-	while (*toPrint == '0')
-		toPrint++;
-	return (toPrint);
+	i = 0;
+	while (toPrint[i] == '0')
+		i++;
+	res = ft_strdup(&toPrint[i]);
+	free(toPrint);
+	return (res);
 }
 
 char	*DIUtoStr(va_list ap, t_checking *check)
@@ -52,7 +56,8 @@ char	*DIUtoStr(va_list ap, t_checking *check)
 
 char	*StoStr(va_list ap, char *toPrint)
 {
-	toPrint = va_arg(ap, char*);
+	toPrint = ft_strdup(va_arg(ap, char*));
+	//toPrint = va_arg(ap, char*);
 	if (!toPrint)
 		toPrint = ft_strdup("(null)");
 	return (toPrint);
@@ -112,7 +117,7 @@ char * fill_toPrint(va_list ap, char *toPrint, t_checking *check)
 	else if (check->type == 'x' || check->type == 'X')
 		toPrint = XtoStr(ap, toPrint, check->type);
 	if (ft_strchr("diuxX", check->type) && check->precision == 0 && *toPrint == '0')
-	{	
+	{
 		free (toPrint);
 		return (ft_strdup(""));
 	}

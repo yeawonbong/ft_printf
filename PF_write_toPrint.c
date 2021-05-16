@@ -93,6 +93,7 @@ void		write_toPrint(char *toPrint, t_checking *check)
 	{
 		write(1, toPrint, ft_strlen(toPrint));
 		check->count += ft_strlen(toPrint);
+		free(toPrint);///////////////////
 	}
 	if (check->type == 'c' && *toPrint == '\0')
 		{
@@ -103,6 +104,4 @@ void		write_toPrint(char *toPrint, t_checking *check)
 		write_gap(gap, gapChar, check);
 	return ;
 //	printf("|@TOPRINT AFTER WRITE IS : %s\n", toPrint);
-
-
 }
