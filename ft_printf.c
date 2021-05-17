@@ -6,12 +6,13 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:21:52 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/17 22:02:39 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/17 22:06:11 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+
 void	ft_write(const void *towrite, int length, t_checking *check)
 {
 	write(1, towrite, length);
@@ -50,11 +51,9 @@ int		ft_printf(const char *input, ...)
 	return (res);
 }
 
-
 // int main()
 //  {
 // 	int *p=0;
 // 	printf("%p\n",p);
 //  	ft_printf("hi\n");
 //  }
-
