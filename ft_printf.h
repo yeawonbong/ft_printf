@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/16 22:28:10 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/17 19:13:36 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char		*ft_itoa(int n);
 char		*ft_utoa(unsigned int n);
 
 char		*ft_strdup(const char *str);
-const char	*lastNum(const char *input);
+const char	*lastnum(const char *input);
 void		*ft_memset(void *ptr, int value, size_t num);
 char		*ft_substr(char const *s, int start, size_t len);
 
@@ -45,12 +45,12 @@ int			ft_printf(const char *input, ...);
 
 const char	*fill_pricision(const char *input, va_list ap, t_checking *check);
 const char	*ft_check(char const *input, va_list ap, t_checking *check);
-char		*CtoStr(va_list ap, char *toPrint);
-char		*XtoStr(va_list ap, char *toPrint, char alpha);
-char		*DIUtoStr(va_list ap, t_checking *check);
-char		*PtoStr(va_list ap, t_checking *check, char *toPrint);
-char		*fill_toPrint(va_list ap, char *toPrint, t_checking *check);
-char		*apply_precision(char *toPrint, t_checking *check);
-void 		write_toPrint(char *toPrint, t_checking *check);
+char		*c_tostr(va_list ap, char *toprint);
+char		*x_tostr(va_list ap, char *toprint, char alpha);
+char		*diu_tostr(va_list ap, t_checking *check);
+char		*p_tostr(va_list ap, t_checking *check, char *toprint);
+char		*fill_toprint(va_list ap, char *toprint, t_checking *check);
+char		*apply_precision(char *toprint, t_checking *check);
+void 		write_toprint(char *toprint, t_checking *check);
 
 #endif

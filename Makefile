@@ -1,8 +1,10 @@
 SRC = ft_printf.c\
 ft_printf_utils.c\
-PF_check.c\
-PF_fill_toPrint.c\
-PF_write_toPrint.c
+ft_printf_utils_string.c\
+pf_check.c\
+pf_fill_toprint.c\
+pf_write_toprint.c
+
 
 SRC_BONUS = 
 

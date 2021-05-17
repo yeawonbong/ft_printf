@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_check.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 17:33:31 by ybong             #+#    #+#             */
+/*   Updated: 2021/05/17 19:13:52 by ybong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-const char *fill_pricision(const char *input, va_list ap, t_checking *check)
+const char	*fill_pricision(const char *input, va_list ap, t_checking *check)
 {
 	input++;
 	if (*input == '*')
@@ -11,10 +23,10 @@ const char *fill_pricision(const char *input, va_list ap, t_checking *check)
 	}
 	else if ('0' <= *input && *input <= '9')
 	{
-		check->precision = ft_atoi(input);	
-		input = lastNum(input);
+		check->precision = ft_atoi(input);
+		input = lastnum(input);
 	}
-	else	//'.'뒤에 아무것도 없는 경우
+	else
 	{
 		check->precision = 0;
 		input--;
@@ -22,26 +34,17 @@ const char *fill_pricision(const char *input, va_list ap, t_checking *check)
 	return (input);
 }
 
-const char *ft_check(char const *input, va_list ap, t_checking *check)
+const char	*ft_check(char const *input, va_list ap, t_checking *check)
 {
-	while (!ft_strchr("cspdiuxX%", *input) && *input) // while 안돌고 한방에 할수도? 고쳐보자 0420 고쳐봤더 0426
+	while (!ft_strchr("cspdiuxX%", *input) && *input)
 	{
 		if (*input == '-')
-		{
 			check->dash = 1;
-		//	input++;
-		}
 		else if (*input == ' ')
-		{
 			check->space = 1;
-		//	input++;
-		}
 		else if (*input == '0')
-		{
 			check->zero = 1;
-		//	input++;
-		}
-		if (('0' <= *input && *input <= '9') || *input == '*') //width
+		if (('0' <= *input && *input <= '9') || *input == '*')
 		{
 			if (*input == '*')
 			{
@@ -55,15 +58,11 @@ const char *ft_check(char const *input, va_list ap, t_checking *check)
 			else
 			{
 				check->width = ft_atoi(input);
-				input = lastNum(input);
+				input = lastnum(input);
 			}
-		//	input++; //10 ???
 		}
-		if (*input == '.') //precision
-		{
+		if (*input == '.')
 			input = fill_pricision(input, ap, check);
-		//	input++;
-		}
 		input++;
 	}
 	if (!*input)
@@ -71,5 +70,3 @@ const char *ft_check(char const *input, va_list ap, t_checking *check)
 	check->type = *input;
 	return (input++);
 }
-
-// && (ft_strchr("scpdiuxxX%", *input)) == 0
