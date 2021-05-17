@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:55:27 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/17 20:07:05 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/17 20:39:12 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ char		*apply_precision(char *toprint, t_checking *check)
 int			write_gap(int gap, int gapchar, t_checking *check)
 {
 	while (gap--)
-	{
-		write(1, &gapchar, 1);
-		check->count++;
-	}
+		ft_write(&gapchar, 1, check);
 	return (gap);
 }
 
@@ -85,22 +82,17 @@ void		write_toprint(char *toprint, t_checking *check)
 		write_gap(gap, gapchar, check);
 	if (check->minus && ft_strchr("di", check->type) && *toprint != '-')
 	{
-		write(1, "-", 1);
-		check->count++;
+		ft_write("-", 1, check);
 		if (check->zero)
 			gap = write_gap(gap, gapchar, check);
 	}
 	if (*toprint)
 	{
-		write(1, toprint, ft_strlen(toprint));
-		check->count += ft_strlen(toprint);
+		ft_write(toprint, ft_strlen(toprint), check);
 		free(toprint);
 	}
 	if (check->type == 'c' && *toprint == '\0')
-	{
-		write(1, "\0", 1);
-		check->count++;
-	}
+		ft_write("\0", 1, check);
 	if (gap && check->dash)
 		write_gap(gap, gapchar, check);
 	return ;

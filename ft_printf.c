@@ -6,19 +6,19 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:21:52 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/17 20:07:11 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/17 22:02:39 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
+void	ft_write(const void *towrite, int length, t_checking *check)
+{
+	write(1, towrite, length);
+	check->count += length;
+}
 
-// int	ft_write(char *towrite, int length, t_checking check)
-// {
-// 	write(1, towrite, length);
-// 	check->count++;
-// }
-
-int	ft_printf(const char *input, ...)
+int		ft_printf(const char *input, ...)
 {
 	va_list		ap;
 	t_checking	*check;
@@ -31,10 +31,7 @@ int	ft_printf(const char *input, ...)
 	while (*input)
 	{
 		if (*input != '%')
-		{
-			write(1, input++, 1);
-			check->count++;
-		}
+			ft_write(input++, 1, check);
 		if (*input == '%')
 		{
 			ft_memset(check, 0, sizeof(t_checking) - sizeof(int));
@@ -53,7 +50,11 @@ int	ft_printf(const char *input, ...)
 	return (res);
 }
 
+
 // int main()
-// {
-// 	ft_printf("hi");
-// }
+//  {
+// 	int *p=0;
+// 	printf("%p\n",p);
+//  	ft_printf("hi\n");
+//  }
+

@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 19:12:10 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/17 20:01:39 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/17 21:35:44 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,17 @@ char		*ft_utoa(unsigned int n)
 	return (res);
 }
 
-const char	*lastnum(const char *input)
+char	*ft_xtoa(char *str, long long temp, int i, int toalpha)
 {
-	while ('0' <= *input && *input <= '9')
-		input++;
-	input--;
-	return (input);
+	long long	num;
+
+	while (0 <= i)
+	{
+		if ((num = temp % 16) < 10)
+			str[i--] = num + '0';
+		else
+			str[i--] = num + toalpha;
+		temp /= 16;
+	}
+	return (str);
 }

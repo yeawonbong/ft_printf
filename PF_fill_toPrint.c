@@ -6,23 +6,62 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:35:26 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/17 17:53:36 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/17 22:03:03 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*c_tostr(va_list ap, char *toprint)
+char	*cs_tostr(va_list ap, char *toprint, t_checking *check)
 {
-	toprint = ft_strdup("0");
-	toprint[0] = va_arg(ap, int);
+	if (check->type == 'c')
+	{
+		toprint = ft_strdup("0");
+		toprint[0] = va_arg(ap, int);
+		return (toprint);
+	}
+	else if (check->type == 's')
+	{
+		toprint = ft_strdup(va_arg(ap, char*));
+		if (!toprint)
+			toprint = ft_strdup("(null)");
+		return (toprint);
+	}
+	return (0);
+}
+
+char	*p_tostr(va_list ap, t_checking *check, char *toprint, int i)
+{
+	long long	temp;
+	int			j;
+	char		*tempstr;
+
+	if ((temp = va_arg(ap, long long)) == 0)
+		return (if_nullp(check));
+	tempstr = (char*)malloc(13);
+	ft_memset(tempstr, '0', 13);
+	tempstr[12] = '\0';
+	i = 11;
+	tempstr = ft_xtoa(tempstr, temp, i, 87);
+	i = 0;
+	while (tempstr[i] == '0')
+		i++;
+	toprint = (char*)malloc(ft_strlen(&(tempstr[i])) + 3);
+	toprint[0] = '0';
+	toprint[1] = 'x';
+	j = 2;
+	if (!*tempstr)
+		toprint[j++] = '0';
+	while (tempstr[i])
+		toprint[j++] = tempstr[i++];
+	toprint[j] = '\0';
+	free(tempstr);
 	return (toprint);
 }
 
 char	*x_tostr(va_list ap, char *toprint, char alpha)
 {
-	unsigned int	temp;
-	unsigned int	num;
+	long long		temp;
 	int				i;
 	int				toalpha;
 	char			*res;
@@ -34,14 +73,7 @@ char	*x_tostr(va_list ap, char *toprint, char alpha)
 	ft_memset(toprint, '0', 15);
 	toprint[14] = '\0';
 	i = 13;
-	while (0 <= i)
-	{
-		if ((num = temp % 16) < 10)
-			toprint[i--] = num + '0';
-		else
-			toprint[i--] = num + toalpha;
-		temp /= 16;
-	}
+	toprint = ft_xtoa(toprint, temp, i, toalpha);
 	i = 0;
 	while (toprint[i] == '0')
 		i++;
@@ -67,64 +99,19 @@ char	*diu_tostr(va_list ap, t_checking *check)
 	return (ft_itoa(temp));
 }
 
-char	*s_str(va_list ap, char *toprint)
-{
-	toprint = ft_strdup(va_arg(ap, char*));
-	if (!toprint)
-		toprint = ft_strdup("(null)");
-	return (toprint);
-}
-
-char	*p_tostr(va_list ap, t_checking *check, char *toprint)
-{
-	long long	temp;
-	int			i;
-	int			j;
-	int			num;
-	char		tempstr[13];
-
-	if ((temp = va_arg(ap, long long)) == 0)
-	{
-		if (check->precision == 0)
-			return (ft_strdup("0x"));
-		return (ft_strdup("0x0"));
-	}
-	ft_memset(tempstr, '0', 12);
-	tempstr[12] = '\0';
-	i = 11;
-	while (0 <= i)
-	{
-		if ((num = temp % 16) < 10)
-			tempstr[i--] = num + 48;
-		else
-			tempstr[i--] = num + 87;
-		temp /= 16;
-	}
-	i = 0;
-	while (tempstr[i] == '0')
-		i++;
-	toprint = (char*)malloc(ft_strlen(&(tempstr[i])) + 3);
-	toprint[0] = '0';
-	toprint[1] = 'x';
-	j = 2;
-	if (!*tempstr)
-		toprint[j++] = '0';
-	while (tempstr[i])
-		toprint[j++] = tempstr[i++];
-	toprint[j] = '\0';
-	return (toprint);
-}
-
 char	*fill_toprint(va_list ap, char *toprint, t_checking *check)
 {
+	int			i;
+
+	i = 0;
 	if (check->type == '%')
 		toprint = ft_strdup("%");
 	else if (check->type == 'c')
-		toprint = c_tostr(ap, toprint);
+		toprint = cs_tostr(ap, toprint, check);
 	else if (check->type == 's')
-		toprint = s_str(ap, toprint);
+		toprint = cs_tostr(ap, toprint, check);
 	else if (check->type == 'p')
-		toprint = p_tostr(ap, check, toprint);
+		toprint = p_tostr(ap, check, toprint, i);
 	else if (check->type == 'd' || check->type == 'i' || check->type == 'u')
 		toprint = diu_tostr(ap, check);
 	else if (check->type == 'x' || check->type == 'X')
