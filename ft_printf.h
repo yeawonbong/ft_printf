@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/17 22:15:40 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/18 14:31:30 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			ft_printf(const char *input, ...);
 
 char		*if_nullp(t_checking *check);
 const char	*lastnum(const char *input);
-const char	*fill_pricision(const char *input, va_list ap, t_checking *check, int gap);
+const char	*fill_pricision(const char *input, va_list ap, t_checking *check);
 const char	*if_num(const char *input, va_list ap, t_checking *check);
 const char	*ft_check(char const *input, va_list ap, t_checking *check);
 char		*cs_tostr(va_list ap, char *toprint, t_checking *check);
@@ -52,9 +52,10 @@ char		*x_tostr(va_list ap, char *toprint, char alpha);
 char		*diu_tostr(va_list ap, t_checking *check);
 char		*p_tostr(va_list ap, t_checking *check, char *toprint, int i);
 char		*fill_toprint(va_list ap, char *toprint, t_checking *check);
-char		*apply_precision(char *toprint, t_checking *check);
+char		*apply_precision(char *toprint, t_checking *check, int gap, int i);
 void 		write_toprint(char *toprint, t_checking *check);
-int			write_minus(int gap, t_checking *check, char gapchar);
+int			write_gap(int gap, int gapchar, t_checking *check);
+int			write_minus(int gap, char gapchar, t_checking *check);
 void		ft_write(const void *towrite, int length, t_checking *check);
 char		*ft_xtoa(char *str, long long temp, int i, int toalpha);
 

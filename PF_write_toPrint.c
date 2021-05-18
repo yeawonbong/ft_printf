@@ -6,30 +6,24 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:55:27 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/17 22:17:12 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/18 14:34:03 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*apply_precision(char *toprint, t_checking *check, int gap)
+char		*apply_precision(char *toprint, t_checking *check, int gap, int i)
 {
 	char	*temp;
-	int		i;
 	int		j;
 
-	i = 0;
 	j = 0;
 	check->zero = 0;
-	if (check->type == 's')
+	if (check->type == 's' && (ft_strlen(toprint) > check->precision))
 	{
-		if (ft_strlen(toprint) > check->precision)
-		{
-			temp = ft_substr(toprint, 0, check->precision);
-			toprint = temp;
-		}
-		else
-			return (toprint);
+		temp = ft_substr(toprint, 0, check->precision);
+		free(toprint);
+		toprint = temp;
 	}
 	else if (ft_strchr("diuxX", check->type)\
 	&& 0 < (gap = check->precision - ft_strlen(toprint)))
@@ -39,6 +33,7 @@ char		*apply_precision(char *toprint, t_checking *check, int gap)
 			temp[i++] = '0';
 		while (toprint[j])
 			temp[i++] = toprint[j++];
+		free(toprint);
 		temp[i] = '\0';
 		toprint = temp;
 	}
@@ -52,7 +47,7 @@ int			write_gap(int gap, int gapchar, t_checking *check)
 	return (gap);
 }
 
-int			write_minus(int gap, t_checking *check, char gapchar)
+int			write_minus(int gap, char gapchar, t_checking *check)
 {
 	ft_write("-", 1, check);
 	if (check->zero)
@@ -77,16 +72,18 @@ void		write_toprint(char *toprint, t_checking *check)
 {
 	int		gap;
 	char	gapchar;
+	int		i;
 
+	i = 0;
 	gap = 0;
 	if (0 <= check->precision && check->type != '%')
-		toprint = apply_precision(toprint, check, gap);
+		toprint = apply_precision(toprint, check, gap, i);
 	gap = preorocess(gap, check, toprint);
 	gapchar = check->zero ? '0' : ' ';
 	if (gap && !check->dash && !(check->minus && check->zero))
 		write_gap(gap, gapchar, check);
 	if (check->minus && ft_strchr("di", check->type) && *toprint != '-')
-		gap = write_minus(gap, check, gapchar);
+		gap = write_minus(gap, gapchar, check);
 	if (*toprint)
 	{
 		ft_write(toprint, ft_strlen(toprint), check);
