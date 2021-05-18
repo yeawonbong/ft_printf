@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:55:27 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 17:02:11 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/18 21:25:03 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,11 @@ void		write_toprint(char *toprint, t_checking *check)
 	if (check->minus && ft_strchr("di", check->type) && *toprint != '-')
 		gap = write_minus(gap, gapchar, check);
 	if (*toprint)
-	{
 		ft_write(toprint, ft_strlen(toprint), check);
-		free(toprint);
-	}
-	if (check->type == 'c' && *toprint == '\0')
+	else if (check->type == 'c')
 		ft_write("\0", 1, check);
 	if (gap && check->dash)
 		write_gap(gap, gapchar, check);
+	free(toprint);
 	return ;
 }
