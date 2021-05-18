@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 14:31:30 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/18 15:20:40 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,19 @@ typedef struct	s_checking
 	char 	type;
 	int		minus;
 	int		count;
-}			t_checking;
+}				t_checking;
 
 int			ft_strlen(const char *str);
 char		ft_strchr(const char *str, char c);
 int			ft_atoi(const char *str);
 char		*ft_itoa(int n);
 char		*ft_utoa(unsigned int n);
-
 char		*ft_strdup(const char *str);
 void		*ft_memset(void *ptr, int value, size_t num);
 char		*ft_substr(char const *s, int start, size_t len);
 
-
 int			ft_printf(const char *input, ...);
+const char	*if_percent(const char *input, va_list ap, t_checking *check, char *toprint)
 
 char		*if_nullp(t_checking *check);
 const char	*lastnum(const char *input);
