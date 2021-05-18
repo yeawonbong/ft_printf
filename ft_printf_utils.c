@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 19:12:10 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 15:34:39 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/18 16:38:42 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,7 @@ char		*ft_utoa(unsigned int n)
 	if (!(res = (char*)malloc(reslen + 1)))
 		return (0);
 	if (tempn < 0)
-	{
 		tempn *= -1;
-	}
 	res[reslen--] = '\0';
 	while (tempn / 10 != 0)
 	{

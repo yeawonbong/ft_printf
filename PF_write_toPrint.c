@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:55:27 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 14:34:03 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/18 17:02:11 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,24 @@ char		*apply_precision(char *toprint, t_checking *check, int gap, int i)
 			temp[i++] = '0';
 		while (toprint[j])
 			temp[i++] = toprint[j++];
-		free(toprint);
 		temp[i] = '\0';
+		free(toprint);
 		toprint = temp;
 	}
 	return (toprint);
+}
+
+int			preorocess(int gap, t_checking *check, char *toprint)
+{
+	if (ft_strchr("cp", check->type) || check->dash)
+		check->zero = 0;
+	if ((gap = check->width - ft_strlen(toprint)) < 0)
+		gap = 0;
+	if (gap && (check->minus))
+		gap--;
+	if (gap && check->type == 'c' && *toprint == '\0')
+		gap--;
+	return (gap);
 }
 
 int			write_gap(int gap, int gapchar, t_checking *check)
@@ -52,19 +65,6 @@ int			write_minus(int gap, char gapchar, t_checking *check)
 	ft_write("-", 1, check);
 	if (check->zero)
 		gap = write_gap(gap, gapchar, check);
-	return (gap);
-}
-
-int			preorocess(int gap, t_checking *check, char *toprint)
-{
-	if (ft_strchr("cp", check->type) || check->dash)
-		check->zero = 0;
-	if ((gap = check->width - ft_strlen(toprint)) < 0)
-		gap = 0;
-	if (gap && (check->minus))
-		gap--;
-	if (gap && check->type == 'c' && *toprint == '\0')
-		gap--;
 	return (gap);
 }
 

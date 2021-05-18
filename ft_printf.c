@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 15:33:44 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 15:36:21 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/18 17:32:33 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ t_checking *check, char *toprint)
 	check->precision = -1;
 	input = ft_check(++input, ap, check);
 	if (check->type == 0)
+	{
+		free(check);
+		free(toprint);
 		return (0);
+	}
 	toprint = fill_toprint(ap, toprint, check);
 	write_toprint(toprint, check);
 	return (input);

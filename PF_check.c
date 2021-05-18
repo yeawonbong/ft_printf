@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:33:31 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 15:35:34 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/18 17:18:11 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ const char	*lastnum(const char *input)
 	return (input);
 }
 
-const char	*fill_pricision(const char *input, va_list ap, t_checking *check)
+const char	*if_precision(const char *input, va_list ap, t_checking *check)
 {
 	input++;
 	if (*input == '*')
@@ -74,14 +74,12 @@ const char	*ft_check(char const *input, va_list ap, t_checking *check)
 	{
 		if (*input == '-')
 			check->dash = 1;
-		else if (*input == ' ')
-			check->space = 1;
 		else if (*input == '0')
 			check->zero = 1;
 		if (('0' <= *input && *input <= '9') || *input == '*')
 			input = if_num(input, ap, check);
 		if (*input == '.')
-			input = fill_pricision(input, ap, check);
+			input = if_precision(input, ap, check);
 		input++;
 	}
 	if (!*input)
