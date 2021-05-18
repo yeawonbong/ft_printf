@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:33:31 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 14:59:57 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/18 15:35:34 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ const char	*ft_check(char const *input, va_list ap, t_checking *check)
 	if (!*input)
 		return (0);
 	check->type = *input;
-	return (++input); // 서식지정자 다음을 가리키면서 끝남.
+	return (++input);
 }

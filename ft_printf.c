@@ -5,15 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/17 17:21:52 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 15:19:04 by ybong            ###   ########.fr       */
+/*   Created: 2021/05/18 15:33:44 by ybong             #+#    #+#             */
+/*   Updated: 2021/05/18 15:36:21 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-void	ft_write(const void *towrite, int length, t_checking *check)
+void		ft_write(const void *towrite, int length, t_checking *check)
 {
 	write(1, towrite, length);
 	check->count += length;
@@ -32,7 +31,7 @@ t_checking *check, char *toprint)
 	return (input);
 }
 
-int		ft_printf(const char *input, ...)
+int			ft_printf(const char *input, ...)
 {
 	va_list		ap;
 	t_checking	*check;

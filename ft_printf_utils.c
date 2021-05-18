@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 19:12:10 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/17 21:35:44 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/18 15:34:39 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char		*ft_utoa(unsigned int n)
 	return (res);
 }
 
-char	*ft_xtoa(char *str, long long temp, int i, int toalpha)
+char		*ft_xtoa(char *str, long long temp, int i, int toalpha)
 {
 	long long	num;
 
