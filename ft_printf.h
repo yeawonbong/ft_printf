@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:29:58 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 19:45:15 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/20 16:06:47 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char			*ft_xtoa(char *str, long long temp, int i, int toalpha);
 **---------------------
 **	ft_printf.c
 */
+char			*ptr_format(char *toprint);
 void			ft_write(const void *towrite, int length, t_checking *check);
 const char		*if_percent(const char *input, va_list ap, t_checking *check\
 , char *toprint);

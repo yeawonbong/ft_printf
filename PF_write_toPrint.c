@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:55:27 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 21:25:03 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/20 16:54:31 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ char		*apply_precision(char *toprint, t_checking *check, int gap, int i)
 	else if (ft_strchr("diuxX", check->type)\
 	&& 0 < (gap = check->precision - ft_strlen(toprint)))
 	{
-		temp = (char*)malloc(check->precision + 1);
+		if (!(temp = (char*)malloc(check->precision + 1)))
+			return (0);
 		while (gap--)
 			temp[i++] = '0';
 		while (toprint[j])

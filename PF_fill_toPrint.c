@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:35:26 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/17 22:03:03 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/20 16:06:29 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ char	*cs_tostr(va_list ap, char *toprint, t_checking *check)
 {
 	if (check->type == 'c')
 	{
-		toprint = ft_strdup("0");
+		if (!(toprint = ft_strdup("0")))
+			return (0);
 		toprint[0] = va_arg(ap, int);
 		return (toprint);
 	}
@@ -24,7 +25,10 @@ char	*cs_tostr(va_list ap, char *toprint, t_checking *check)
 	{
 		toprint = ft_strdup(va_arg(ap, char*));
 		if (!toprint)
-			toprint = ft_strdup("(null)");
+		{
+			if (!(toprint = ft_strdup("(null)")))
+				return (0);
+		}
 		return (toprint);
 	}
 	return (0);
@@ -38,7 +42,8 @@ char	*p_tostr(va_list ap, t_checking *check, char *toprint, int i)
 
 	if ((temp = va_arg(ap, long long)) == 0)
 		return (if_nullp(check));
-	tempstr = (char*)malloc(13);
+	if (!(tempstr = (char*)malloc(13)))
+		return (0);
 	ft_memset(tempstr, '0', 13);
 	tempstr[12] = '\0';
 	i = 11;
@@ -47,8 +52,7 @@ char	*p_tostr(va_list ap, t_checking *check, char *toprint, int i)
 	while (tempstr[i] == '0')
 		i++;
 	toprint = (char*)malloc(ft_strlen(&(tempstr[i])) + 3);
-	toprint[0] = '0';
-	toprint[1] = 'x';
+	toprint = ptr_format(toprint);
 	j = 2;
 	if (!*tempstr)
 		toprint[j++] = '0';
@@ -69,7 +73,8 @@ char	*x_tostr(va_list ap, char *toprint, char alpha)
 	toalpha = alpha == 'x' ? 87 : 55;
 	if (!(temp = va_arg(ap, unsigned int)))
 		return (ft_strdup("0"));
-	toprint = (char*)malloc(15);
+	if (!(toprint = (char*)malloc(15)))
+		return (0);
 	ft_memset(toprint, '0', 15);
 	toprint[14] = '\0';
 	i = 13;

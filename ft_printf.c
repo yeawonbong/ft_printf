@@ -6,11 +6,18 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 15:33:44 by ybong             #+#    #+#             */
-/*   Updated: 2021/05/18 21:23:22 by ybong            ###   ########.fr       */
+/*   Updated: 2021/05/20 16:06:56 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+char		*ptr_format(char *toprint)
+{
+	toprint[0] = '0';
+	toprint[1] = 'x';
+	return (toprint);
+}
 
 void		ft_write(const void *towrite, int length, t_checking *check)
 {
@@ -43,7 +50,8 @@ int			ft_printf(const char *input, ...)
 	int			res;
 
 	toprint = NULL;
-	check = malloc(sizeof(t_checking));
+	if (!(check = malloc(sizeof(t_checking))))
+		return (0);
 	check->count = 0;
 	va_start(ap, input);
 	while (*input)

@@ -5,15 +5,11 @@ pf_check.c\
 pf_fill_toprint.c\
 pf_write_toprint.c
 
-
-SRC_BONUS = 
-
 CC = gcc
 CFLAGES = -Wall -Wextra -Werror
 AR = ar rcs
 NAME = libftprintf.a
 OBJ = $(SRC:.c=.o)
-OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 all : $(NAME)
 
@@ -21,12 +17,14 @@ $(NAME) : $(OBJ)
 	$(AR) $@ $(OBJ)
 
 %.o:%.c
-	$(CC) $(CFLAGES) -c $< -o $@
+	$(CC) $(CFLAGES) -c $(SRC)
 
 clean :
-	rm -f *.o
+	rm -f $(OBJ)
 
 fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
+
+.PHONY: all clean fclean re
